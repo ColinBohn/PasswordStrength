@@ -10,7 +10,7 @@ using TShockAPI.Hooks;
 
 namespace PasswordStrength
 {
-    [ApiVersion(1,14)]
+    [ApiVersion(1,16)]
     public class PasswordStrength : TerrariaPlugin
     {
         public override string Name
@@ -62,6 +62,9 @@ namespace PasswordStrength
         {
             if (args.CommandName == "register")
             {
+                if (args.Parameters.Count == 0)
+                    return;
+
                 if (args.Parameters[0].ToUpper() == args.Player.Name.ToUpper())
                 {
                     args.Player.SendErrorMessage("ERROR: Your password cannot be the same as your name.");
@@ -90,6 +93,9 @@ namespace PasswordStrength
             }
             if (args.CommandName == "password")
             {
+                if (args.Parameters.Count < 2)
+                    return;
+
                 if (args.Parameters[1].ToUpper() == args.Player.Name.ToUpper())
                 {
                     args.Player.SendErrorMessage("ERROR: Your password cannot be the same as your name.");
